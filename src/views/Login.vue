@@ -1,4 +1,12 @@
 <script setup lang="ts">
+import { ref, reactive ,onMounted} from 'vue'
+const loginModel = reactive({ account: "", password: "",  savepasswd: false})
+
+const login = () => {
+    const account = loginModel.account;
+    const password = loginModel.password;
+    console.log(account,password,loginModel.savepasswd)
+}
 
 </script>
 
@@ -7,6 +15,18 @@
     <div class="container">
         <div class="login_box">
             <div class="login_title">欢迎登录</div>
+            <div class="account_input">
+                <el-input placeholder="请输入账户名" v-model="loginModel.account" />
+            </div>
+            <div class="password_input">
+                <el-input placeholder="请输入密码" v-model="loginModel.password" type="password"/>
+            </div>
+            <div class="remember_password">
+                <el-checkbox label="记住密码" size="large" v-model="loginModel.savepasswd"/>
+            </div>
+            <div class="login_btn">
+                <el-button type="success" plain @click="login">登录</el-button>
+            </div>
         </div>
     </div>
   </main>
@@ -52,5 +72,36 @@
     color: #8bc555;
     font-size: 30px;
     width: 331px;
+}
+
+
+.account_input{
+    width: 332px;
+    padding: 0 20px;
+    margin-top: 20px;
+}
+
+.password_input{
+    @extend .account_input;
+    margin-top: 20px;
+}
+.remember_password{
+    @extend .account_input;
+    margin-top: 25px;
+    :deep(.el-checkbox__label){
+        color: #8bc555 !important;
+    }
+    :deep(.el-checkbox__input.is-checked .el-checkbox__inner){
+        background-color: #8bc555
+    }
+}
+.login_btn{
+    @extend .account_input;
+    margin-left: 22px;
+    margin-top: 25px;
+    
+}
+.login_btn > button {
+    width: 250px;
 }
 </style>
