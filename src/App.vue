@@ -1,23 +1,36 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+import HeaderComponent from '@/components/Header/Header.vue'
+import { reactive,onMounted ,watchEffect } from 'vue'
+import { useRoute } from 'vue-router'
+
+
+const route = useRoute()
+const state = reactive({ path: route.path })
+
+
+//自动追踪路由数据变化
+watchEffect(() => {state.path = route.path})
+
+
+//全局修改elementUI样式配置
+onMounted(() => {
+    state.path = route.path
+    document.body.style.setProperty('--el-bg-color', '#eee');
+})
+
+console.log(state.path)
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+    <header v-if="state.path !== '/login'">
+        <HeaderComponent/>     
+    </header>
+    <br v-if="state.path !== '/login'"/>
+    <div class="main_content">  
+        <RouterView />
     </div>
-  </header>
-
-  <RouterView />
 </template>
 
 <style scoped>
@@ -59,8 +72,6 @@ nav a:first-of-type {
 @media (min-width: 1024px) {
   header {
     display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
   }
 
   .logo {

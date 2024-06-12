@@ -15,6 +15,9 @@ coverage
 *.local
 /node_modules
 
+/src/assets/bgimg.png
+/src/assets/login_box.png
+
 /cypress/videos/
 /cypress/screenshots/
 
