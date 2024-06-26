@@ -69,7 +69,7 @@ const login = () => {
     justify-content: center;
     height: 44px;
     line-height: 44px;
-    color: #8bc555;
+    color: var(--theme--word--color);
     font-size: 30px;
     width: 331px;
 }
@@ -89,10 +89,10 @@ const login = () => {
     @extend .account_input;
     margin-top: 25px;
     :deep(.el-checkbox__label){
-        color: #8bc555 !important;
+        color: var(--theme--word--color) !important;
     }
     :deep(.el-checkbox__input.is-checked .el-checkbox__inner){
-        background-color: #8bc555
+        background-color: var(--theme--word--color)
     }
 }
 .login_btn{
